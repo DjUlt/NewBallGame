@@ -49,18 +49,26 @@ namespace NewBallGame
                 {
                     if (i > 2 || x > 2)
                     {
-                        tempint = random.Next(1, 10);
-                        if (tempint < 6)
+                        tempint = random.Next(1, 100);
+                        if (tempint < 61)
                         {
                             Table[i, x] = new GameElement(7);
                         }
-                        else if (tempint > 5 && tempint < 8)
+                        else if (tempint > 60 && tempint < 76)
+                        {
+                            Table[i, x] = new GameElement(0);
+                        }
+                        else if (tempint > 75 && tempint < 88)
                         {
                             Table[i, x] = new GameElement(1);
                         }
-                        else if (tempint > 7)
+                        else if (tempint > 87 && tempint < 96)
                         {
-                            Table[i, x] = new GameElement(0);
+                            Table[i, x] = new GameElement(5);
+                        }
+                        else if (tempint > 95)
+                        {
+                            Table[i, x] = new GameElement(9);
                         }
                     }
                     else
@@ -72,7 +80,6 @@ namespace NewBallGame
             }
 
             //Setting up ball
-            Table[1, 1] = ball1;
             ball1.SetCoordinates(1, 1);
 
             //Setting up layer table for selector
@@ -171,6 +178,11 @@ namespace NewBallGame
                         //Console.ForegroundColor = ConsoleColor.Magenta;
                         s += '■';
                     }
+                    else if (ball1.X == i && ball1.Y == j)
+                    {
+                            //Console.ForegroundColor = ConsoleColor.Magenta;
+                            s += '•';
+                    }
                     else
                     {
                         //if(Table[i, j].type=='#') Console.ForegroundColor = ConsoleColor.DarkMagenta;
@@ -244,5 +256,7 @@ namespace NewBallGame
             Table[x, y] = new GameElement(t);
             Table[x, y].SetCoordinates(x, y);
         }
+
+        
     }
 }
