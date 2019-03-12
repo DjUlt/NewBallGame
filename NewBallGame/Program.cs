@@ -47,6 +47,10 @@ namespace NewBallGame
             //exit statement
             for (; ; )
             {
+                if (field1.ball1.NextTrap(field1))
+                {
+                    endgame = true;
+                }
                 if (!endgame)
                 {
                     if (startgame)
@@ -81,7 +85,9 @@ namespace NewBallGame
                                 break;
                             case ConsoleKey.C:
                                 field1.selector.SetC(field1);
-                                //field1.RandomAdd(1, field1);
+                                break;
+                            case ConsoleKey.Escape:
+                                Environment.Exit(0);
                                 break;
                         }
                         //Console.ReadLine();
@@ -141,12 +147,6 @@ namespace NewBallGame
         //private static void TimerCallback(Object o)
         private static void TimerT(object source, ElapsedEventArgs e)
         {
-            if (field1.ball1.NextTrap(field1))
-            {
-                endgame = true;
-                return;
-            }
-
             //Case of all orbs absorbed
             if (field1.IsCleared())
             {
@@ -173,7 +173,7 @@ namespace NewBallGame
 
             //Console.WriteLine(field1.SearcherLeftTop(1)[0]+" "+field1.SearcherLeftTop(1)[1]);//SearchLeftTop
             
-            Console.WriteLine("Controls: Z - /,X - \\, C - clear.\nUse arrows to move cursor.");
+            Console.WriteLine("Controls: \nZ - /, X - \\, C - clear.\nUse arrows to move cursor.\nPress ESC to exit.");
             //Console.WriteLine("Selector: "+field1.selector.X + " " + field1.selector.Y);
             //Console.WriteLine("BallD: " + field1.ball1.Dx + " " + field1.ball1.Dy);
             //Console.WriteLine("BallC: " + field1.ball1.X + " " + field1.ball1.Y);

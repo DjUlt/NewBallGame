@@ -87,77 +87,6 @@ namespace NewBallGame
             selector.SetCoordinates(0, 0);
         }
 
-        public int CountAll(int t)
-        {
-            int counter = 0;
-                    for(int i = 0; i < X; i++)
-                    {
-                        for(int x = 0; x < Y; x++)
-                        {
-                            if(Table[i,x].type==new GameElement(t).type)
-                            {
-                                counter++;
-                            }
-                        }
-                    }
-            return counter;
-        }
-
-        public int CountStroka(int t,int stroka)
-        {
-            int counter = 0;
-            for (int i = 0; i < X; i++)
-            {
-                    if (Table[i, stroka].type == new GameElement(t).type)
-                    {
-                        counter++;
-                    }
-            }
-            return counter;
-        }
-
-        public int CountStolbec(int t, int stolbec)
-        {
-            int counter = 0;
-            for (int i = 0; i < Y; i++)
-            {
-                if (Table[stolbec, i].type == new GameElement(t).type)
-                {
-                    counter++;
-                }
-            }
-            return counter;
-        }
-
-        public int countdiagonal(int t, int diagtype)
-        {
-            int counter = 0;
-            for (int i = 0; i < Y; i++)
-            {
-                if (Table[i, i].type == new GameElement(t).type)
-                {
-                    counter++;
-                }
-            }
-            return counter;
-        }
-
-        public int CountOblast(int t, int[] dot)//int[] = {x1,y1,x2,y2}
-        {
-            int counter = 0;
-            for (int i = dot[0]; i < dot[2]; i++)
-            {
-                for (int x = dot[1]; x < dot[3]; x++)
-                {
-                    if (Table[i, x].type == new GameElement(t).type)
-                    {
-                        counter++;
-                    }
-                }
-            }
-            return counter;
-        }
-
         public string Visualize()
         {
             //return string.Join("",Table);
@@ -197,28 +126,6 @@ namespace NewBallGame
             return s;
         }
 
-        public string VisualizeType(int t)
-        {
-            //return string.Join("",Table);
-            var s = "";
-            for (int i = 0; i < Table.GetLength(0); i++)
-            {
-                //if (i > 0) s += ',';
-                //s += "\n";
-                for (int j = 0; j < Table.GetLength(1); j++)
-                {
-                    if (j > 0) s += ',';
-
-                    if (Table[i, j].type == new GameElement(t).type)
-                    {
-                        s += Table[i, j].type;
-                    }
-                }
-                s += "\n";
-            }
-            return s;
-        }
-
         public void ClearField()
         {
             for(int i = 0; i < X; i++)
@@ -230,22 +137,157 @@ namespace NewBallGame
                 }
             }
         }
+        
+        public bool IsCleared()
+        {
+            return CountOblast(1, new int[4] { 1, 1, X - 1, Y - 1 }) == 0;
+        }
+
+
+        //Lab tasks
+        public int CountAll(int t)
+        {
+            int counter = 0;
+            for (int i = 0; i < X; i++)
+            {
+                for (int x = 0; x < Y; x++)
+                {
+                    if (Table[i, x].type == new GameElement(t).type)
+                    {
+                        counter++;
+                    }
+                }
+            }
+            return counter;
+        }
+
+        public int CountStroka(int t, int stroka)
+        {
+            int counter = 0;
+            for (int i = 0; i < X; i++)
+            {
+                if (Table[i, stroka].type == new GameElement(t).type)
+                {
+                    counter++;
+                }
+            }
+            return counter;
+        }
+
+        public int CountStolbec(int t, int stolbec)
+        {
+            int counter = 0;
+            for (int i = 0; i < Y; i++)
+            {
+                if (Table[stolbec, i].type == new GameElement(t).type)
+                {
+                    counter++;
+                }
+            }
+            return counter;
+        }
+
+        public int countdiagonal(int t, int diagtype)//diagtype = 1 - main diag | 2 - second diag
+        {
+            int counter = 0;
+            if (diagtype == 0)
+            {
+                for (int i = 0; i < Y; i++)
+                {
+                    if (Table[i, i].type == new GameElement(t).type)
+                    {
+                        counter++;
+                    }
+                }
+            }
+            else
+            {
+                for (int i = Y - 1, x = 0; i > -1 && x < Y; i--, x++)
+                {
+                    if (Table[x, i].type == new GameElement(t).type)
+                    {
+                        counter++;
+                    }
+                }
+            }
+            return counter;
+        }
+
+        public int CountOblast(int t, int[] dot)//int[] = {x1,y1,x2,y2}
+        {
+            int counter = 0;
+            for (int i = dot[0]; i < dot[2]; i++)
+            {
+                for (int x = dot[1]; x < dot[3]; x++)
+                {
+                    if (Table[i, x].type == new GameElement(t).type)
+                    {
+                        counter++;
+                    }
+                }
+            }
+            return counter;
+        }
+
+        public string VisualizeType(int t, int d)//d = 0 - only this element type | 1 - exclude
+        {
+            //return string.Join("",Table);
+            var s = "";
+            for (int i = 0; i < Table.GetLength(0); i++)
+            {
+                //if (i > 0) s += ',';
+                //s += "\n";
+                for (int j = 0; j < Table.GetLength(1); j++)
+                {
+                    if (j > 0) s += ',';
+
+                    if (d == 0)
+                    {
+                        if (Table[i, j].type == new GameElement(t).type)
+                        {
+                            s += Table[i, j].type;
+                        }
+                    }
+                    else
+                    {
+                        if (Table[i, j].type != new GameElement(t).type)
+                        {
+                            s += Table[i, j].type;
+                        }
+                    }
+                }
+                s += "\n";
+            }
+            return s;
+        }
+
+        public GameElement[] SearcherAll(int t)
+        {
+            GameElement[] array = new GameElement[CountAll(t)];
+            int counter = 0;
+            for (int x = 0; x < X; x++)
+            {
+                for (int y = 0; y < Y; y++)
+                {
+                    if (Table[x, y].type == new GameElement(t).type)
+                    {
+                        array[counter] = Table[x, y];
+                    }
+                }
+            }
+            return array;
+        }
 
         public int[] SearcherLeftTop(int t)
         {
             for (int d = 1; d < X + Y; d++)
             {
-                for(int x = d, y = 1; x > 0&&y<Y-1; x--,y++)
+                for (int x = d, y = 1; x > 0 && y < Y - 1; x--, y++)
                 {
-                    if (Table[x,y].type == new GameElement(t).type) return new int[] {x ,y };
+                    if (Table[x, y].type == new GameElement(t).type) return new int[] { x, y };
                 }
             }
-            return new int[] {-1, -1 };
-        }
-        
-        public bool IsCleared()
-        {
-            return CountOblast(1, new int[4] { 1, 1, X - 1, Y - 1 }) == 0;
+            return new int[] { -1, -1 };
         }
 
         public void RandomAdd(int t,GameField field)
@@ -257,6 +299,15 @@ namespace NewBallGame
             Table[x, y].SetCoordinates(x, y);
         }
 
-        
+        public void Replacer(int t1, int t2)
+        {
+            GameElement[] array = SearcherAll(t1);
+            foreach (GameElement e in array)
+            {
+                Table[e.X, e.Y] = new GameElement(t2);
+                Table[e.X, e.Y].SetCoordinates(e.X, e.Y);
+            }
+        }
+
     }
 }
