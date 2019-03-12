@@ -102,15 +102,16 @@ namespace NewBallGame
 
         private static void GameEndField(System.Timers.Timer t, System.Timers.Timer v)
         {
-            t.Stop();
             v.Stop();
+            t.Stop();
             field1.ClearField();
+            Console.ForegroundColor = ConsoleColor.White;
             Console.Clear();
             Console.WriteLine("\n\n\n                      Game Over");
             Console.WriteLine("                          :(\n");
             Console.WriteLine("                    press R to retry");
             Console.WriteLine("                M to return to main menu");
-            Console.WriteLine("                   E to exit the game");
+            Console.WriteLine("                   ESC to exit the game");
             var ch = Console.ReadKey(true).Key;
             //var ch = Console.Read();
             switch (ch)
@@ -128,7 +129,7 @@ namespace NewBallGame
                     Console.ReadLine();
                     Environment.Exit(0);
                     break;
-                case ConsoleKey.E:
+                case ConsoleKey.Escape:
                 //case 'e':
                     Environment.Exit(0);
                     break;
@@ -166,14 +167,16 @@ namespace NewBallGame
         {
             //visualize
             Console.Clear();
-            Console.Write(field1.Visualize());
+            //Console.WriteLine(field1.Visualize());
+            field1.Visualize();
 
             // 0 - #, 1 - @, 2 - •, 3 - /, 4 - \, 5 - ₴, 6 - +, 7 - ;8 - ■
-            Console.WriteLine("Orbs collected: " + field1.Orbs);
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine("\nOrbs collected: " + field1.Orbs);
 
             //Console.WriteLine(field1.SearcherLeftTop(1)[0]+" "+field1.SearcherLeftTop(1)[1]);//SearchLeftTop
             
-            Console.WriteLine("Controls: \nZ - /, X - \\, C - clear.\nUse arrows to move cursor.\nPress ESC to exit.");
+            Console.WriteLine("\nControls: \nZ - /, X - \\, C - clear.\nUse arrows to move cursor.\nPress ESC to exit.");
             //Console.WriteLine("Selector: "+field1.selector.X + " " + field1.selector.Y);
             //Console.WriteLine("BallD: " + field1.ball1.Dx + " " + field1.ball1.Dy);
             //Console.WriteLine("BallC: " + field1.ball1.X + " " + field1.ball1.Y);

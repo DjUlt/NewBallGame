@@ -87,43 +87,49 @@ namespace NewBallGame
             selector.SetCoordinates(0, 0);
         }
 
-        public string Visualize()
+        //public string Visualize()
+        public void Visualize()
         {
-            //return string.Join("",Table);
-            var s = "";
+            //var s = "";
             for (int i = 0; i < Table.GetLength(0); i++)
             {
                 //if (i > 0) s += ',';
                 //s += "\n";
+                Console.Write("\n");
                 for (int j = 0; j < Table.GetLength(1); j++)
                 {
                     if (j > 0)
                     {
-                        //Console.ForegroundColor = ConsoleColor.Black;
-                        s += ',';
+                        Console.ForegroundColor = ConsoleColor.Black;
+                        //s += ',';
+                        Console.Write(',');
                     }
                     if (selector.X == i && selector.Y == j)
                     {
-                        //Console.ForegroundColor = ConsoleColor.Magenta;
-                        s += '■';
+                        Console.ForegroundColor = ConsoleColor.Magenta;
+                        //s += '■';
+                        Console.Write('■');
                     }
                     else if (ball1.X == i && ball1.Y == j)
                     {
-                            //Console.ForegroundColor = ConsoleColor.Magenta;
-                            s += '•';
+                        Console.ForegroundColor = ConsoleColor.Magenta;
+                        //s += '•';
+                        Console.Write('•');
                     }
                     else
                     {
-                        //if(Table[i, j].type=='#') Console.ForegroundColor = ConsoleColor.DarkMagenta;
-                        //else if (Table[i, j].type == '/'||Table[i,j].type == '\\') Console.ForegroundColor = ConsoleColor.Green;
-                        //else if (Table[i, j].type == '@') Console.ForegroundColor = ConsoleColor.Blue;
-                        s += Table[i, j].type;
+                        if(Table[i, j].type=='#') Console.ForegroundColor = ConsoleColor.DarkMagenta;
+                        else if (Table[i, j].type == '/'||Table[i,j].type == '\\') Console.ForegroundColor = ConsoleColor.Green;
+                        else if (Table[i, j].type == '@') Console.ForegroundColor = ConsoleColor.Blue;
+                        else if (Table[i, j].type == '₴') Console.ForegroundColor = ConsoleColor.Cyan;
+                        else if (Table[i, j].type == '¤') Console.ForegroundColor = ConsoleColor.DarkRed;
+                        //s += Table[i, j].type;
+                        Console.Write(Table[i, j].type);
                     }
                 }
-                s += "\n";
+                //s += "\n";
             }
-            //Console.SetCursorPosition(selector.X, selector.Y);
-            return s;
+            //return s;
         }
 
         public void ClearField()
@@ -144,7 +150,7 @@ namespace NewBallGame
         }
 
 
-        //Lab tasks
+        //Lab tasks ===================================================================================================
         public int CountAll(int t)
         {
             int counter = 0;
