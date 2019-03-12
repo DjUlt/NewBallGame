@@ -1,0 +1,7 @@
+D:\VSProjects\NewBallGame\NewBallGame\bin\Debug\NewBallGame.exe.config
+D:\VSProjects\NewBallGame\NewBallGame\bin\Debug\NewBallGame.exe
+D:\VSProjects\NewBallGame\NewBallGame\bin\Debug\NewBallGame.pdb
+D:\VSProjects\NewBallGame\NewBallGame\obj\Debug\NewBallGame.csprojAssemblyReference.cache
+D:\VSProjects\NewBallGame\NewBallGame\obj\Debug\NewBallGame.csproj.CoreCompileInputs.cache
+D:\VSProjects\NewBallGame\NewBallGame\obj\Debug\NewBallGame.exe
+D:\VSProjects\NewBallGame\NewBallGame\obj\Debug\NewBallGame.pdb
