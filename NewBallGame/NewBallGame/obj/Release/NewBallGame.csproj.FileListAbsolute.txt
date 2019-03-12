@@ -1,6 +1,0 @@
-D:\VSProjects\NewBallGame\NewBallGame\bin\Release\NewBallGame.exe.config
-D:\VSProjects\NewBallGame\NewBallGame\bin\Release\NewBallGame.exe
-D:\VSProjects\NewBallGame\NewBallGame\bin\Release\NewBallGame.pdb
-D:\VSProjects\NewBallGame\NewBallGame\obj\Release\NewBallGame.csproj.CoreCompileInputs.cache
-D:\VSProjects\NewBallGame\NewBallGame\obj\Release\NewBallGame.exe
-D:\VSProjects\NewBallGame\NewBallGame\obj\Release\NewBallGame.pdb
