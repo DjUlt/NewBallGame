@@ -103,6 +103,11 @@ namespace NewBallGame
             }
 
             }
+            else if (field1.Table[X + Dx, Y + Dy].type == '↑')//move up if arrow
+            {
+                Dx = 0;
+                Dy = -Dy;
+            }
             //else if (field1.Table[X + Dx, Y + Dy].type == '¤')//move if free
             //{
             //    Program.GameOver();

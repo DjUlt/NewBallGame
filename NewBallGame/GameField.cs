@@ -19,20 +19,20 @@ namespace NewBallGame
         {
             X = x;
             Y = y;
-            Table = new GameElement[X,Y];
+            Table = new GameElement[X, Y];
         }
 
         public void CreateField()
         {
             //Creating walls
-            for(int i = 0; i < X; i++)
+            for (int i = 0; i < X; i++)
             {
                 Table[i, 0] = new GameElement(0);// 0 - #, 1 - @, 2 - •, 3 - /, 4 - \, 5 - ₴, 6 - +, 7 - ;8 - ■
                 Table[i, Y - 1] = new GameElement(0);
                 Table[i, 0].SetCoordinates(i, 0);
                 Table[i, 0].SetCoordinates(i, Y - 1);
             }
-            for (int i = 0;i < Y; i++)
+            for (int i = 0; i < Y; i++)
             {
                 Table[0, i] = new GameElement(0);
                 Table[X - 1, i] = new GameElement(0);
@@ -40,7 +40,7 @@ namespace NewBallGame
                 Table[X - 1, i].SetCoordinates(X - 1, i);
             }
 
-            //fill randomly with objects
+            //RANDOM generator
             Random random = new Random();
             int tempint = 0;
             for (int i = 1; i < X - 1; i++)
@@ -49,7 +49,7 @@ namespace NewBallGame
                 {
                     if (i > 2 || x > 2)
                     {
-                        tempint = random.Next(1, 100);
+                        tempint = random.Next(1, 100);//add some ↑
                         if (tempint < 61)
                         {
                             Table[i, x] = new GameElement(7);
@@ -79,12 +79,54 @@ namespace NewBallGame
                 }
             }
 
+            //PATTERN generator+fill with random if not patterned
+            if (X > 5)//playzone is bigger than 3
+            {
+                Pattern pattern;
+                GameElement[,] array;
+                int c = 0;
+                for (int i = X - 2 / 3; i > 0; i--)//count of pattern structs
+                {
+                    //for (int z = 2; z < (X - 2) * (X - 2); z++)//count of elements
+                    //{
+                        for (int x = (X - 2) % 3 + 1; x < X - 3; x++)
+                        {
+                            for (int y = (X - 2) % 3 + 1; y < X - 3; y++)
+                            {
+                                if (this.AreaIsClear(this,new[]{ x,y},new[]{ x + 2,y + 2}))
+                                {
+                                pattern = new Pattern(random.Next(1,2));//3x3 structs
+                                array = pattern.ReturnPattern();
+                                for (int l = x; l < x + 3; l++) 
+                                {
+                                    for (int m = y; m < y + 3; m++) 
+                                    {
+                                        Table[l, m] = array[l - x, m - y];
+                                    }
+                                }
+                                c++;
+                                if (c == i) goto Foo;
+                                }
+                            }
+                        }
+                    //}
+                }
+            Foo:
+                Nothing();
+            }
+            
+
             //Setting up ball
             ball1.SetCoordinates(1, 1);
 
             //Setting up layer table for selector
             selector = new Selector(8, this);
             selector.SetCoordinates(0, 0);
+        }
+
+        public void Nothing()
+        {
+
         }
 
         //public string Visualize()
@@ -130,6 +172,18 @@ namespace NewBallGame
                 //s += "\n";
             }
             //return s;
+        }
+
+        public bool AreaIsClear(GameField field1,int[] a1, int[] a2)//a= x,y
+        {
+            for (int x = a1[0]; x < a2[0] + 1; x++) 
+            {
+                for (int y = a1[1]; y < a2[1] + 1; y++)
+                {
+                    if (field1.Table[x, y].type == new GameElement(0).type) return false;
+                }
+            }
+            return true;
         }
 
         public void ClearField()

@@ -22,6 +22,7 @@ namespace NewBallGame
             //Console.BackgroundColor = ConsoleColor.Black; Console.ForegroundColor = ConsoleColor.Red;
             Console.BackgroundColor = ConsoleColor.Black;
             Console.OutputEncoding = System.Text.Encoding.UTF8;
+            Console.CursorVisible = false;
             //Console.SetWindowSize(field1.Y * 5, field1.X + Convert.ToInt32(field1.X * 0.5));
 
             //game setup
