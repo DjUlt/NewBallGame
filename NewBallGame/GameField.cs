@@ -180,7 +180,7 @@ namespace NewBallGame
             {
                 for (int y = a1[1]; y < a2[1] + 1; y++)
                 {
-                    if (field1.Table[x, y].type == new GameElement(0).type) return false;
+                    if (field1.Table[x, y].type == new GameElement(0).type || field1.Table[x, y].type == new GameElement(5).type) return false;
                 }
             }
             return true;

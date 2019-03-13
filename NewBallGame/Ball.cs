@@ -28,6 +28,7 @@ namespace NewBallGame
             {
                 Dx = -Dx;
                 Dy = -Dy;
+                Console.Beep(300,150);//beep 2
             }
             else if (field1.Table[X + Dx, Y + Dy].type == '@')//collect if orb
             {
@@ -36,6 +37,8 @@ namespace NewBallGame
                     field1.Orbs++;
                     field1.Table[X, Y] = new GameElement(7);
                     field1.Table[X, Y].SetCoordinates(X, Y);
+                Console.Beep(600, 100);
+                //beep wow
             }
             else if (field1.Table[X + Dx, Y + Dy].type == '/')//bounce if /
             {
@@ -67,11 +70,7 @@ namespace NewBallGame
                     Dy = 0;
                 }
 
-                    //if (field1.Table[X + Dx, Y + Dy].type == ' ')
-                    //{
-                    //    Y += Dy;
-                    //    X += Dx;
-                    //}//add other gameelement cases
+                Console.Beep(300, 150);//beep like wall
             }
             else if(field1.Table[X + Dx, Y + Dy].type == '\\')// bounce if \
             {
@@ -101,7 +100,7 @@ namespace NewBallGame
                 }
                 Dy = 0;
             }
-
+                Console.Beep(300, 150);//beep like wall
             }
             else if (field1.Table[X + Dx, Y + Dy].type == '↑')//move up if arrow
             {
@@ -118,6 +117,10 @@ namespace NewBallGame
         {
             if (field1.Table[X + Dx, Y + Dy].type == '¤')
             {
+                Console.Beep(415, 500);
+                Console.Beep(400, 600);
+                Console.Beep(385, 500);
+                Console.Beep(355, 900);
                 return true;
             }
             return false;

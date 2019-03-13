@@ -11,34 +11,37 @@ namespace NewBallGame
     class Program
     {
         static public bool endgame = false;
-        static public bool startgame = true;
+        static public bool startgame = false;
+        static public bool mainmenu = true;
+        public static int selector = 1;
+
+        static System.Timers.Timer t = new System.Timers.Timer();
+        static System.Timers.Timer v = new System.Timers.Timer();
+        static System.Timers.Timer s = new System.Timers.Timer();
 
         //Creating field
-        static int c = GetInt();
-        static GameField field1 = new GameField(c, c);
+        static GameField field1;
 
         static void Main()
         {
             //Console.BackgroundColor = ConsoleColor.Black; Console.ForegroundColor = ConsoleColor.Red;
             Console.BackgroundColor = ConsoleColor.Black;
+            Console.ForegroundColor = ConsoleColor.White;
             Console.OutputEncoding = System.Text.Encoding.UTF8;
             Console.CursorVisible = false;
+            Console.Title = "New Ball Game";
             //Console.SetWindowSize(field1.Y * 5, field1.X + Convert.ToInt32(field1.X * 0.5));
-
+            int c;
             //game setup
-            field1.CreateField();
             //Timer t = new Timer(TimerCallback, null, 0, 1000);
             //Timer v = new Timer(TimerCallback1, null, 0, 100);
-            startgame = false;
-            System.Timers.Timer t = new System.Timers.Timer();
             t.Elapsed += new ElapsedEventHandler(TimerT);
             t.Interval = 1000;
-            t.Start();
-            System.Timers.Timer v = new System.Timers.Timer();
             v.Elapsed += new ElapsedEventHandler(TimerV);
             v.Interval = 200;
-            v.Start();
-
+            s.Elapsed += new ElapsedEventHandler(TimerS);
+            s.Interval = 200;
+            s.Start();
             //Timer with additional arguments
             //var timer = new System.Timers.Timer { Interval = 1500 };
             //timer.Elapsed += (sender, e) => MyElapsedMethod(sender, e, field1);
@@ -48,10 +51,8 @@ namespace NewBallGame
             //exit statement
             for (; ; )
             {
-                if (field1.ball1.NextTrap(field1))
+                if (!mainmenu)
                 {
-                    endgame = true;
-                }
                 if (!endgame)
                 {
                     if (startgame)
@@ -63,7 +64,11 @@ namespace NewBallGame
                     }
                     else
                     {
-                        var ch = Console.ReadKey(true).Key;
+                        if (field1.ball1.NextTrap(field1))
+                        {
+                          endgame = true;
+                        }
+                            var ch = Console.ReadKey(true).Key;
                         switch (ch)
                         {
                             case ConsoleKey.LeftArrow:
@@ -90,7 +95,14 @@ namespace NewBallGame
                             case ConsoleKey.Escape:
                                 Environment.Exit(0);
                                 break;
-                        }
+                            case ConsoleKey.R:
+                                    v.Stop();
+                                    t.Stop();
+                                    endgame = false;
+                                    startgame = false;
+                                    mainmenu = true;
+                                    break;
+                            }
                         //Console.ReadLine();
                     }
                 }
@@ -98,6 +110,65 @@ namespace NewBallGame
                 {
                     GameEndField(t, v);
                 }
+                }
+                else
+                {
+                    t.Stop();
+                    v.Stop();
+                    Console.Clear();
+                    
+                    for (bool lol=false;!lol ; )
+                    {
+                        Console.Clear();
+                        //mainmenu text
+                        Console.WriteLine("\n\n\n");
+                        Console.ForegroundColor = ConsoleColor.White;
+                        Console.Write("          MAIN MENU\n\n\n          ");
+                        if(selector ==1 ) Console.BackgroundColor = ConsoleColor.Green;
+                        else Console.BackgroundColor = ConsoleColor.Black;
+                        Console.Write("Start game\n\n");
+                        Console.BackgroundColor = ConsoleColor.Black;
+                        Console.Write("          ");
+                        if (selector == 2) Console.BackgroundColor = ConsoleColor.Green;
+                        else Console.BackgroundColor = ConsoleColor.Black;
+                        Console.Write("Exit game\n\n");
+                        Console.BackgroundColor = ConsoleColor.Black;
+                        Console.WriteLine("Use arrows to choose, enter to select");
+                        s.Start();
+
+                        var ch = Console.ReadKey(true).Key;
+                        switch (ch)
+                        {
+                            case ConsoleKey.DownArrow:
+                                if (selector == 1) selector = 2;
+                                else if (selector == 2) selector = 1;
+                                break;
+                            case ConsoleKey.UpArrow:
+                                if (selector == 2) selector = 1;
+                                else if (selector == 1) selector = 2;
+                                break;
+                            case ConsoleKey.Enter:
+                                if (selector == 1)
+                                {
+                                    startgame = true;
+                                    Console.Clear();
+                                    c = GetInt();
+                                    field1 = new GameField(c, c);
+                                    mainmenu = false;
+                                    s.Stop();
+                                    lol = true;
+                                }
+                                else
+                                {
+                                    Environment.Exit(0);
+                                }
+                                break;
+                            case ConsoleKey.Escape:
+                                Environment.Exit(0);
+                                break;
+                        }
+                    }
+                    }
             }
         }
 
@@ -125,10 +196,10 @@ namespace NewBallGame
                     Console.Clear();
                     break;
                 case ConsoleKey.M:
-                //case 'm':
-                    Console.WriteLine("                      Currently no Menu/n                   Press Enter to exit");
-                    Console.ReadLine();
-                    Environment.Exit(0);
+                    //case 'm':
+                    endgame = false;
+                    startgame = false;
+                    mainmenu = true;
                     break;
                 case ConsoleKey.Escape:
                 //case 'e':
@@ -139,14 +210,96 @@ namespace NewBallGame
             //Console.Clear();
         }
 
+        private static void Song()
+        {
+            s.Interval = 25000;
+            Console.Beep(440, 500);
+            Console.Beep(440, 500);
+            Console.Beep(440, 500);
+            Console.Beep(349, 350);
+            Console.Beep(523, 150);
+            Console.Beep(440, 500);
+            Console.Beep(349, 350);
+            Console.Beep(523, 150);
+            Console.Beep(440, 1000);
+            Console.Beep(659, 500);
+            Console.Beep(659, 500);
+            Console.Beep(659, 500);
+            Console.Beep(698, 350);
+            Console.Beep(523, 150);
+            Console.Beep(415, 500);
+            Console.Beep(349, 350);
+            Console.Beep(523, 150);
+            Console.Beep(440, 1000);
+            Console.Beep(880, 500);
+            Console.Beep(440, 350);
+            Console.Beep(440, 150);
+            Console.Beep(880, 500);
+            Console.Beep(830, 250);
+            Console.Beep(784, 250);
+            Console.Beep(740, 125);
+            Console.Beep(698, 125);
+            Console.Beep(740, 250);
+            Thread.Sleep(250); // Delay 250 milliseconds !!!! 
+            Console.Beep(455, 250);
+            Console.Beep(622, 500);
+            Console.Beep(587, 250);
+            Console.Beep(554, 250);
+            Console.Beep(523, 125);
+            Console.Beep(466, 125);
+            Console.Beep(523, 250);
+            Thread.Sleep(250); // Delay 250 milliseconds !!!! 
+            Console.Beep(349, 125);
+            Console.Beep(415, 500);
+            Console.Beep(349, 375);
+            Console.Beep(440, 125);
+            Console.Beep(523, 500);
+            Console.Beep(440, 375);
+            Console.Beep(523, 125);
+            Console.Beep(659, 1000);
+            Console.Beep(880, 500);
+            Console.Beep(440, 350);
+            Console.Beep(440, 150);
+            Console.Beep(880, 500);
+            Console.Beep(830, 250);
+            Console.Beep(784, 250);
+            Console.Beep(740, 125);
+            Console.Beep(698, 125);
+            Console.Beep(740, 250);
+            Thread.Sleep(250);
+            Console.Beep(455, 250);
+            Console.Beep(622, 500);
+            Console.Beep(587, 250);
+            Console.Beep(554, 250);
+            Console.Beep(523, 125);
+            Console.Beep(466, 125);
+            Console.Beep(523, 250);
+            Thread.Sleep(250);
+            Console.Beep(349, 250);
+            Console.Beep(415, 500);
+            Console.Beep(349, 375);
+            Console.Beep(523, 125);
+            Console.Beep(440, 500);
+            Console.Beep(349, 375);
+            Console.Beep(261, 125);
+            Console.Beep(440, 1000);
+            Thread.Sleep(100);
+        }
+
         private static int GetInt()//make square for diag
         {
-            Console.WriteLine("Set height and width of the play field");
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.Write("\n\n\n   Set height and width of the play field\n\n                   ");
             return Convert.ToInt32(Console.ReadLine());
         }
 
-        //private static void TimerCallback(Object o)
-        private static void TimerT(object source, ElapsedEventArgs e)
+        private static void TimerS(object source, ElapsedEventArgs e)
+        {
+            Song();
+        }
+
+            //private static void TimerCallback(Object o)
+            private static void TimerT(object source, ElapsedEventArgs e)
         {
             //Case of all orbs absorbed
             if (field1.IsCleared())
