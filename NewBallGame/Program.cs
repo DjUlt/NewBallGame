@@ -13,9 +13,9 @@ namespace NewBallGame
         static public bool endgame = false;
         static public bool startgame = true;
 
-        static int c = 0;
         //Creating field
-        static GameField field1 = new GameField(GetInt(), GetInt());
+        static int c = GetInt();
+        static GameField field1 = new GameField(c, c);
 
         static void Main()
         {
@@ -35,7 +35,7 @@ namespace NewBallGame
             t.Start();
             System.Timers.Timer v = new System.Timers.Timer();
             v.Elapsed += new ElapsedEventHandler(TimerV);
-            v.Interval = 100;
+            v.Interval = 200;
             v.Start();
 
             //Timer with additional arguments
@@ -140,8 +140,7 @@ namespace NewBallGame
 
         private static int GetInt()//make square for diag
         {
-            if (c == 0) { Console.WriteLine("Set height of the play field"); c++; }
-            else Console.WriteLine("Set width of the play field");
+            Console.WriteLine("Set height and width of the play field");
             return Convert.ToInt32(Console.ReadLine());
         }
 

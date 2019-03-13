@@ -118,8 +118,8 @@ namespace NewBallGame
                     }
                     else
                     {
-                        if(Table[i, j].type=='#') Console.ForegroundColor = ConsoleColor.DarkMagenta;
-                        else if (Table[i, j].type == '/'||Table[i,j].type == '\\') Console.ForegroundColor = ConsoleColor.Green;
+                        if (Table[i, j].type == '#') Console.ForegroundColor = ConsoleColor.DarkMagenta;
+                        else if (Table[i, j].type == '/' || Table[i, j].type == '\\') Console.ForegroundColor = ConsoleColor.Green;
                         else if (Table[i, j].type == '@') Console.ForegroundColor = ConsoleColor.Blue;
                         else if (Table[i, j].type == '₴') Console.ForegroundColor = ConsoleColor.Cyan;
                         else if (Table[i, j].type == '¤') Console.ForegroundColor = ConsoleColor.DarkRed;
