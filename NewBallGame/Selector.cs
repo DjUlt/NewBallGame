@@ -39,7 +39,7 @@ namespace NewBallGame
 
         public void SetS(GameField field1)//3 - /
         {
-            if (field1.Table[X, Y].type == ' '|| field1.Table[X, Y].type == '\\')
+            if ((field1.Table[X, Y].type == ' ' || field1.Table[X, Y].type == '\\') && X != 0 && Y != 0 && X != field1.X - 1 && Y != field1.Y - 1) 
             {
                 field1.Table[X, Y] = new GameElement(3);
                 field1.Table[X, Y].SetCoordinates(X, Y);
@@ -48,7 +48,7 @@ namespace NewBallGame
 
         public void SetBS(GameField field1)//4 - \
         {
-            if (field1.Table[X, Y].type == ' '|| field1.Table[X, Y].type == '/')
+            if ((field1.Table[X, Y].type == ' '|| field1.Table[X, Y].type == '/') && X != 0 && Y != 0 && X != field1.X - 1 && Y != field1.Y - 1)
             {
                 field1.Table[X, Y] = new GameElement(4);
                 field1.Table[X, Y].SetCoordinates(X, Y);

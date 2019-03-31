@@ -14,6 +14,7 @@ namespace NewBallGame
         public Ball ball1 = new Ball(2);
         public int Orbs = 0;//collected orbs count
         public Selector selector;
+        public int time = 0;
 
         public GameField(int x, int y)
         {
@@ -27,15 +28,15 @@ namespace NewBallGame
             //Creating walls
             for (int i = 0; i < X; i++)
             {
-                Table[i, 0] = new GameElement(0);// 0 - #, 1 - @, 2 - •, 3 - /, 4 - \, 5 - ₴, 6 - +, 7 - ;8 - ■
-                Table[i, Y - 1] = new GameElement(0);
+                Table[i, 0] = new GameElement(7);// 0 - #, 1 - @, 2 - •, 3 - /, 4 - \, 5 - ₴, 6 - +, 7 - ;8 - ■
+                Table[i, Y - 1] = new GameElement(7);
                 Table[i, 0].SetCoordinates(i, 0);
                 Table[i, 0].SetCoordinates(i, Y - 1);
             }
             for (int i = 0; i < Y; i++)
             {
-                Table[0, i] = new GameElement(0);
-                Table[X - 1, i] = new GameElement(0);
+                Table[0, i] = new GameElement(7);
+                Table[X - 1, i] = new GameElement(7);
                 Table[0, i].SetCoordinates(0, i);
                 Table[X - 1, i].SetCoordinates(X - 1, i);
             }
@@ -188,6 +189,7 @@ namespace NewBallGame
 
         public void ClearField()
         {
+            time = 0;
             for(int i = 0; i < X; i++)
             {
                 for(int x = 0; x < Y; x++)

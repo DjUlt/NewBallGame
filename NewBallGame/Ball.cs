@@ -18,8 +18,23 @@ namespace NewBallGame
 
         public void Move(GameField field1)
         {
-
-            if (field1.Table[X + Dx, Y + Dy].type == ' '|| field1.Table[X + Dx, Y + Dy].type == '₴')//move if free
+            if (X+Dx>field1.X-1)
+            {
+                X = 0;
+            }
+            else if (X + Dx < 0)
+            {
+                X = field1.X - 1;
+            }
+            else if (Y+Dy>field1.Y-1)
+            {
+                Y = 0;
+            }
+            else if (Y + Dy < 0)
+            {
+                Y = field1.Y - 1;
+            }
+            else if (field1.Table[X + Dx, Y + Dy].type == ' '|| field1.Table[X + Dx, Y + Dy].type == '₴')//move if free
             {
                 X += Dx;
                 Y += Dy;
@@ -115,6 +130,7 @@ namespace NewBallGame
 
         public bool NextTrap(GameField field1)
         {
+            if (X + Dx > field1.X - 1 || X + Dx < 0 || Y + Dy > field1.Y - 1 || Y + Dy < 0) return false;
             if (field1.Table[X + Dx, Y + Dy].type == '¤')
             {
                 Console.Beep(415, 500);
