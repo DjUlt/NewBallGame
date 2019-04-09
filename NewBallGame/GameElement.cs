@@ -12,7 +12,7 @@ namespace NewBallGame
         public int X;
         public int Y;
 
-        public GameElement(int T)// 0 - # | 1 - @ | 2 - • | 3 - / | 4 - \ | 5 - ₴ | 6 - + | 7 - ' ' | 8 - ■ | 9 - ¤ | 10 - ↑ |
+        public GameElement(int T)// 0 - # | 1 - @ | 2 - • | 3 - / | 4 - \ | 5 - ₴ | 6 - + | 7 - ' ' | 8 - ■ | 9 - ¤ | 10 - ↑ | 11 - ← | 12 - → | 13 - ↓ |
         {
             switch (T)
             {
@@ -48,6 +48,15 @@ namespace NewBallGame
                     break;
                 case 10:
                     type = '↑';
+                    break;
+                case 11:
+                    type = '←';
+                    break;
+                case 12:
+                    type = '→';
+                    break;
+                case 13:
+                    type = '↓';
                     break;
             }
         }

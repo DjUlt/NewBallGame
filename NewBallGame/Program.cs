@@ -369,8 +369,8 @@ namespace NewBallGame
             Console.WriteLine("\nOrbs collected: " + field1.Orbs);
             field1.time+=200;
             Console.WriteLine("\nTime spent(m.s.ms): " + (int)(field1.time / 60000) + "." + (int)((field1.time / 1000) % 60) + "." + field1.time % 1000);
-            Console.WriteLine("\nTime left(m.s.ms): " + (int)((60000 - field1.time) / 60000) + "." + (int)(((60000 - field1.time) /1000) %60) + "." + (60000 - field1.time) % 1000);
-            if (60000 - field1.time < 1) endgame = true;
+            Console.WriteLine("\nTime left(m.s.ms): " + (int)((60000*field1.X/2 - field1.time) / 60000) + "." + (int)(((60000 * field1.X / 2 - field1.time) /1000) %60) + "." + (60000 * field1.X / 2 - field1.time) % 1000);
+            if (60000 * field1.X / 2 - field1.time < 1) endgame = true;
             //Console.WriteLine(field1.SearcherLeftTop(1)[0]+" "+field1.SearcherLeftTop(1)[1]);//SearchLeftTop
 
             Console.WriteLine("\nControls: \nZ - /, X - \\, C - clear.\nUse arrows to move cursor.\nPress ESC to exit.");

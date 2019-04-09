@@ -50,7 +50,7 @@ namespace NewBallGame
                 {
                     if (i > 2 || x > 2)
                     {
-                        tempint = random.Next(1, 100);//add some ↑
+                        tempint = random.Next(1, 120);//add some ↑
                         if (tempint < 61)
                         {
                             Table[i, x] = new GameElement(7);
@@ -67,9 +67,25 @@ namespace NewBallGame
                         {
                             Table[i, x] = new GameElement(5);
                         }
-                        else if (tempint > 95)
+                        else if (tempint > 95 && tempint < 101) 
                         {
                             Table[i, x] = new GameElement(9);
+                        }
+                        else if (tempint > 100 && tempint < 106)
+                        {
+                            Table[i, x] = new GameElement(10);
+                        }
+                        else if (tempint > 105 && tempint < 111)
+                        {
+                            Table[i, x] = new GameElement(11);
+                        }
+                        else if (tempint > 110 && tempint < 116)
+                        {
+                            Table[i, x] = new GameElement(12);
+                        }
+                        else if (tempint > 115)
+                        {
+                            Table[i, x] = new GameElement(13);
                         }
                     }
                     else
@@ -166,6 +182,7 @@ namespace NewBallGame
                         else if (Table[i, j].type == '@') Console.ForegroundColor = ConsoleColor.Blue;
                         else if (Table[i, j].type == '₴') Console.ForegroundColor = ConsoleColor.Cyan;
                         else if (Table[i, j].type == '¤') Console.ForegroundColor = ConsoleColor.DarkRed;
+                        else if (Table[i, j].type == '↑'|| Table[i, j].type == '←' || Table[i, j].type == '→' || Table[i, j].type == '↓') Console.ForegroundColor = ConsoleColor.DarkBlue;
                         //s += Table[i, j].type;
                         Console.Write(Table[i, j].type);
                     }

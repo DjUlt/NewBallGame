@@ -45,6 +45,38 @@ namespace NewBallGame
                 Dy = -Dy;
                 Console.Beep(300,150);//beep 2
             }
+            else if (field1.Table[X + Dx, Y + Dy].type == '↑')//move back if wall
+            {
+                X += Dx;
+                Y += Dy;
+                Dx = -1;
+                Dy = 0;
+                Console.Beep(500, 200);//beep 2
+            }
+            else if (field1.Table[X + Dx, Y + Dy].type == '←')//move back if wall
+            {
+                X += Dx;
+                Y += Dy;
+                Dx = 0;
+                Dy = -1;
+                Console.Beep(500, 200);//beep 2
+            }
+            else if (field1.Table[X + Dx, Y + Dy].type == '→')//move back if wall
+            {
+                X += Dx;
+                Y += Dy;
+                Dx = 0;
+                Dy = 1;
+                Console.Beep(500, 200);//beep 2
+            }
+            else if (field1.Table[X + Dx, Y + Dy].type == '↓')//move back if wall
+            {
+                X += Dx;
+                Y += Dy;
+                Dx = 1;
+                Dy = 0;
+                Console.Beep(500, 200);//beep 2
+            }
             else if (field1.Table[X + Dx, Y + Dy].type == '@')//collect if orb
             {
                     X += Dx;
@@ -122,10 +154,6 @@ namespace NewBallGame
                 Dx = 0;
                 Dy = -Dy;
             }
-            //else if (field1.Table[X + Dx, Y + Dy].type == '¤')//move if free
-            //{
-            //    Program.GameOver();
-            //}
         }
 
         public bool NextTrap(GameField field1)
