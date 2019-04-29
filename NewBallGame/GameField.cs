@@ -50,7 +50,7 @@ namespace NewBallGame
                 {
                     if (i > 2 || x > 2)
                     {
-                        tempint = random.Next(1, 120);//add some ↑
+                        tempint = random.Next(1, 130);//add some ↑
                         if (tempint < 61)
                         {
                             Table[i, x] = new GameElement(7);
@@ -67,7 +67,7 @@ namespace NewBallGame
                         {
                             Table[i, x] = new GameElement(5);
                         }
-                        else if (tempint > 95 && tempint < 101) 
+                        else if (tempint > 95 && tempint < 101)
                         {
                             Table[i, x] = new GameElement(9);
                         }
@@ -83,9 +83,45 @@ namespace NewBallGame
                         {
                             Table[i, x] = new GameElement(12);
                         }
-                        else if (tempint > 115)
+                        else if (tempint > 115 && tempint < 121)
                         {
                             Table[i, x] = new GameElement(13);
+                        }
+                        else if (tempint > 120 && tempint < 126)
+                        {
+                            Table[i, x] = new GameElement(6);
+                        }
+                        else if (tempint > 125)
+                        {
+                            Random rand = new Random();
+                            while (true)
+                            {
+                            int tempX = rand.Next(0, X);
+                            int tempY = rand.Next(0, Y);
+
+                                if (Table[tempX, tempY] != null)
+                                {
+                                    if (Table[tempX, tempY].type == ' ') { 
+                                    linkedTP tempTP = new linkedTP(14);
+                                    Table[i, x] = tempTP;
+                                    Table[tempX, tempY] = Table[i, x];
+                                    Table[tempX, tempY].SetCoordinates(tempX, tempY);
+                                    tempTP.X1 = tempX;
+                                    tempTP.Y1 = tempY;
+                                    break;
+                                    }
+                                }
+                                else
+                                {
+                                    linkedTP tempTP = new linkedTP(14);
+                                    Table[i, x] = tempTP;
+                                    Table[tempX, tempY] = Table[i, x];
+                                    Table[tempX, tempY].SetCoordinates(tempX, tempY);
+                                    tempTP.X1 = tempX;
+                                    tempTP.Y1 = tempY;
+                                    break;
+                                }
+                            }
                         }
                     }
                     else
@@ -181,7 +217,7 @@ namespace NewBallGame
                         else if (Table[i, j].type == '/' || Table[i, j].type == '\\') Console.ForegroundColor = ConsoleColor.Green;
                         else if (Table[i, j].type == '@') Console.ForegroundColor = ConsoleColor.Blue;
                         else if (Table[i, j].type == '₴') Console.ForegroundColor = ConsoleColor.Cyan;
-                        else if (Table[i, j].type == '¤') Console.ForegroundColor = ConsoleColor.DarkRed;
+                        else if (Table[i, j].type == '¤'|| Table[i, j].type == '+'|| Table[i, j].type == 'æ') Console.ForegroundColor = ConsoleColor.DarkRed;
                         else if (Table[i, j].type == '↑'|| Table[i, j].type == '←' || Table[i, j].type == '→' || Table[i, j].type == '↓') Console.ForegroundColor = ConsoleColor.DarkBlue;
                         //s += Table[i, j].type;
                         Console.Write(Table[i, j].type);

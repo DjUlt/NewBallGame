@@ -45,6 +45,27 @@ namespace NewBallGame
                 Dy = -Dy;
                 Console.Beep(300,150);//beep 2
             }
+            else if (field1.Table[X+Dx,Y+Dy].type== '+')
+            {
+                Random rand = new Random();
+                while (true)
+                {
+                    int tempX = rand.Next(0,field1.X);
+                    int tempY = rand.Next(0,field1.Y);
+                    if(field1.Table[tempX,tempY].type==' ')
+                    {
+                        X = tempX;
+                        Y = tempY;
+                        break;
+                    }
+                }
+            }
+            else if (field1.Table[X + Dx, Y + Dy].type == 'æ')
+            {
+                linkedTP tempTP = (linkedTP)field1.Table[X + Dx, Y + Dy];
+                X = tempTP.X1;
+                Y = tempTP.Y1;
+            }
             else if (field1.Table[X + Dx, Y + Dy].type == '↑')//move back if wall
             {
                 X += Dx;
