@@ -373,7 +373,7 @@ namespace NewBallGame
             if (60000 * field1.X / 2 - field1.time < 1) endgame = true;
             //Console.WriteLine(field1.SearcherLeftTop(1)[0]+" "+field1.SearcherLeftTop(1)[1]);//SearchLeftTop
 
-            Console.WriteLine("\nControls: \nZ - /, X - \\, C - clear.\nUse arrows to move cursor.\nPress ESC to exit.");
+            Console.WriteLine("\nControls: \nZ - /, X - \\, C - clear,\nR - to quit to main menu.\nUse arrows to move cursor.\nPress ESC to exit.");
             //Console.WriteLine("Selector: "+field1.selector.X + " " + field1.selector.Y);
             //Console.WriteLine("BallD: " + field1.ball1.Dx + " " + field1.ball1.Dy);
             //Console.WriteLine("BallC: " + field1.ball1.X + " " + field1.ball1.Y);
