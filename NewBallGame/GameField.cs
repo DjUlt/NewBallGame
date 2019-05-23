@@ -258,6 +258,37 @@ namespace NewBallGame
             return CountOblast(1, new int[4] { 1, 1, X - 1, Y - 1 }) == 0;
         }
 
+        public string winformvisualize()
+        {
+            var s = "";
+            for (int i = 0; i < Table.GetLength(0); i++)
+            {
+                if (i > 0) s += ',';
+                s += "\n";
+                for (int j = 0; j < Table.GetLength(1); j++)
+                {
+                    if (j > 0)
+                    {
+                        s += ',';
+                    }
+                    if (selector.X == i && selector.Y == j)
+                    {
+                        s += '■';
+                    }
+                    else if (ball1.X == i && ball1.Y == j)
+                    {
+                        s += '•';
+                    }
+                    else
+                    {
+                        s += Table[i, j].type;
+                    }
+                }
+                s += "\n";
+            }
+            return s;
+        }
+
 
         //Lab tasks ===================================================================================================
         public int CountAll(int t)

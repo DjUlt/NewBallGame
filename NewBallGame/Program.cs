@@ -29,6 +29,8 @@ namespace NewBallGame
 
         static void Main()
         {
+            MainMenu test = new MainMenu();
+            test.ShowDialog();
             //Console.BackgroundColor = ConsoleColor.Black; Console.ForegroundColor = ConsoleColor.Red;
             Console.BackgroundColor = ConsoleColor.Black;
             Console.ForegroundColor = ConsoleColor.White;
