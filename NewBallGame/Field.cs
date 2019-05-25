@@ -16,8 +16,7 @@ namespace NewBallGame
         public Field()
         {
             InitializeComponent();
-           Timer t = new Timer();
-           Timer v = new Timer();
+           
             t.Tick += new EventHandler(TimerT);
             t.Interval = 1000;
             v.Tick += new EventHandler(TimerV);
@@ -28,6 +27,9 @@ namespace NewBallGame
             v.Start();
             startgame = false;
         }
+
+        Timer t = new Timer();
+        Timer v = new Timer();
 
         static public bool endgame = false;
         static public bool startgame = false;
@@ -50,8 +52,11 @@ namespace NewBallGame
         void GameEndField()
         {
             field1.ClearField();
+            
+            t.Stop();
+            v.Stop();
             label1.Text = "";
-            //label1.Text="\n\n\n                      Game Over"+"                          :(\n"+"                time spent(m.s.ms): " + (int)(totaltime / 60000) + "." + (int)((totaltime / 1000) % 60) + "." + totaltime % 1000 + "\n"+"                orbs collected: " + field1.Orbs + "\n"+"                total points: " + (int)(field1.Orbs * 233 + 60000 * clearedfields / Math.Sqrt(totaltime)) + "\n\n"+"                    press ESC to exit the game";
+            label1.Text="\n\n\n                      Game Over"+"                          :(\n"+"                time spent(m.s.ms): " + (int)(totaltime / 60000) + "." + (int)((totaltime / 1000) % 60) + "." + totaltime % 1000 + "\n"+"                orbs collected: " + field1.Orbs + "\n"+"                total points: " + (int)(field1.Orbs * 233 + 60000 * clearedfields / Math.Sqrt(totaltime)) + "\n\n"+ "                    press ESC to exit the game\n                      R to quit to main menu";
             clearedfields = 0;
         }
 
@@ -125,6 +130,11 @@ namespace NewBallGame
             }
             else if (e.KeyData == Keys.R)
             {
+                t.Stop();
+                v.Stop();
+                t.Dispose();
+                v.Dispose();
+                field1.ClearField();
                 this.Close();
             }
         }

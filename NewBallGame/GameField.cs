@@ -263,13 +263,13 @@ namespace NewBallGame
             var s = "";
             for (int i = 0; i < Table.GetLength(0); i++)
             {
-                if (i > 0) s += ',';
+                if (i > 0) s += "   ";
                 s += "\n";
                 for (int j = 0; j < Table.GetLength(1); j++)
                 {
                     if (j > 0)
                     {
-                        s += ',';
+                        s += "   ";
                     }
                     if (selector.X == i && selector.Y == j)
                     {
